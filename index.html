@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caça Palavras 🔍</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <h1>🔍 Caça Palavras</h1>
+  <p class="subtitle">Selecione palavras clicando e arrastando no grid</p>
+
+  <div class="difficulty">
+    <button class="diff-btn active" onclick="setDiff(1, this)">Fácil</button>
+    <button class="diff-btn" onclick="setDiff(2, this)">Médio</button>
+    <button class="diff-btn" onclick="setDiff(3, this)">Difícil</button>
+  </div>
+
+  <div class="top-bar">
+    <div class="theme-badge" id="theme-label">Tema: Animais</div>
+    <div class="score-box">
+      <div class="stat">Encontradas: <span id="found-count">0</span></div>
+      <div class="stat">Tempo: <span id="timer-display">02:00</span></div>
+    </div>
+  </div>
+
+  <div class="timer-bar">
+    <div class="timer-fill" id="timer-fill"></div>
+  </div>
+
+  <div class="main">
+    <div class="grid-wrap">
+      <div id="grid"></div>
+    </div>
+    <div class="sidebar">
+      <div class="words-title">Encontre:</div>
+      <div id="word-list"></div>
+      <div class="hint-indicator" id="hint-txt"></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="newGame()">Novo Jogo 🎲</button>
+    <button class="btn-secondary" onclick="giveHint()">Dica 💡</button>
+  </div>
+
+  <div class="win-banner" id="win-banner">
+    <h2>🎉 Parabéns!</h2>
+    <p id="win-msg">Você encontrou todas as palavras!</p>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

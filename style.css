@@ -1,0 +1,323 @@
+/* ===========================
+   Caça Palavras — Estilos
+   =========================== */
+
+/* Reset e variáveis globais */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --c1: #6C63FF;
+  --c2: #FF6584;
+  --c3: #43C6AC;
+  --c4: #F7B731;
+  --bg: #F8F7FF;
+  --card: #ffffff;
+  --txt: #2D2B55;
+  --muted: #888888;
+  --cell: 38px;
+}
+
+/* Corpo da página */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  padding: 20px 12px;
+  min-height: 100vh;
+}
+
+/* Título principal */
+h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.2rem;
+  color: var(--c1);
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* Seleção de dificuldade */
+.difficulty {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.diff-btn {
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: var(--card);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.diff-btn.active {
+  background: var(--c1);
+  color: #fff;
+  border-color: var(--c1);
+}
+
+.diff-btn:hover:not(.active) {
+  background: #f0eeff;
+}
+
+/* Barra superior com tema e placar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-badge {
+  background: var(--c1);
+  color: #fff;
+  border-radius: 20px;
+  padding: 5px 16px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.score-box {
+  display: flex;
+  gap: 10px;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt);
+}
+
+.stat span {
+  color: var(--c1);
+}
+
+/* Barra de tempo */
+.timer-bar {
+  height: 5px;
+  background: #e0dff5;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.timer-fill {
+  height: 100%;
+  background: var(--c1);
+  border-radius: 3px;
+  transition: width 1s linear;
+  width: 100%;
+}
+
+/* Layout principal (grid + lista de palavras) */
+.main {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Grid do jogo */
+.grid-wrap {
+  position: relative;
+}
+
+#grid {
+  display: grid;
+  gap: 2px;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Célula individual do grid */
+.cell {
+  width: var(--cell);
+  height: var(--cell);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 6px;
+  background: var(--card);
+  border: 1px solid #e0dff5;
+  transition: background 0.1s, color 0.1s;
+  color: var(--txt);
+}
+
+/* Estados da célula */
+.cell.hover       { background: #e8e6ff; color: var(--c1); }
+.cell.selecting   { background: var(--c1); color: #fff; border-color: var(--c1); }
+
+/* Palavras encontradas — cada cor diferente */
+.cell.found-0 { background: #6C63FF22; color: #6C63FF; border-color: #6C63FF55; }
+.cell.found-1 { background: #FF658422; color: #e0375e; border-color: #FF658455; }
+.cell.found-2 { background: #43C6AC22; color: #1a9a7f; border-color: #43C6AC55; }
+.cell.found-3 { background: #F7B73122; color: #c07a00; border-color: #F7B73155; }
+.cell.found-4 { background: #a29bfe33; color: #7c6fe0; border-color: #a29bfe55; }
+
+/* Sidebar com a lista de palavras */
+.sidebar {
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.words-title {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.word-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0eeff;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--txt);
+  transition: color 0.2s;
+}
+
+.word-item.found {
+  color: #bbb;
+  text-decoration: line-through;
+}
+
+.word-item .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hint-indicator {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* Botões de ação */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.1s;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: var(--c1);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: var(--card);
+  color: var(--txt);
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #f0eeff;
+}
+
+/* Banner de vitória */
+.win-banner {
+  display: none;
+  text-align: center;
+  background: linear-gradient(135deg, var(--c1), var(--c3));
+  color: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.win-banner h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.7rem;
+  margin-bottom: 6px;
+}
+
+.win-banner p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===========================
+   Responsivo — Tela pequena
+   =========================== */
+@media (max-width: 520px) {
+  :root {
+    --cell: 28px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 16px;
+  }
+
+  .word-item {
+    width: 45%;
+  }
+}
